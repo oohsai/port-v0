@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AURA | Creative Content Agency</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;700&family=Oswald:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              charcoal: "#121212",
+              lavender: "#D8C5F0",
+              deepPurple: "#2D2638",
+              warmBeige: "#F3E9DC",
+              vibrantOrange: "#FF6B35",
+              offWhite: "#FAFAFA",
+            },
+            fontFamily: {
+              display: ["Oswald", "sans-serif"],
+              body: ["Manrope", "sans-serif"],
+            },
+            backgroundImage: {
+              "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Styles for hiding scrollbars and custom cursor -->
+    <style>
+      body {
+        cursor: none;
+        overflow-x: hidden;
+        background-color: #121212;
+      }
+
+      /* Custom Cursor */
+      .cursor-dot,
+      .cursor-outline {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 9999;
+        pointer-events: none;
+      }
+      .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #ff6b35;
+      }
+      .cursor-outline {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        transition:
+          width 0.2s,
+          height 0.2s,
+          background-color 0.2s;
+      }
+
+      /* Utilities */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Image Reveal Mask */
+      .reveal-img {
+        clip-path: inset(0 0 100% 0);
+        transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+      }
+      .reveal-img.active {
+        clip-path: inset(0 0 0 0);
+      }
+
+      /* Bento Hover */
+      .bento-card:hover .bento-arrow {
+        transform: translate(4px, -4px);
+      }
+    </style>
+  </head>
+  <body
+    class="text-offWhite font-body selection:bg-vibrantOrange selection:text-white"
+  >
+    <!-- Custom Cursor Elements -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 z-50 flex w-full items-center justify-between px-6 py-6 text-white mix-blend-difference"
+    >
+      <div class="font-display text-2xl font-bold tracking-tighter uppercase">
+        Aura Studios
+      </div>
+
+      <div
+        class="hidden gap-8 text-sm font-medium tracking-widest uppercase md:flex"
+      >
+        <a href="#services" class="hover:text-lavender transition-colors"
+          >Services</a
+        >
+        <a href="#work" class="hover:text-lavender transition-colors">Work</a>
+        <a href="#studio" class="hover:text-lavender transition-colors"
+          >Studio</a
+        >
+      </div>
+
+      <button id="menu-btn" class="group relative z-50 space-y-1.5 md:hidden">
+        <span
+          class="group-hover:bg-vibrantOrange block h-0.5 w-8 bg-white transition-colors"
+        ></span>
+        <span
+          class="group-hover:bg-vibrantOrange block h-0.5 w-8 bg-white transition-colors"
+        ></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div
+      id="mobile-menu"
+      class="bg-charcoal fixed inset-0 z-40 flex translate-x-full transform flex-col items-center justify-center text-center"
+    >
+      <a
+        href="#"
+        class="mobile-link font-display hover:text-vibrantOrange mb-6 text-5xl uppercase"
+        >Home</a
+      >
+      <a
+        href="#"
+        class="mobile-link font-display hover:text-vibrantOrange mb-6 text-5xl uppercase"
+        >Work</a
+      >
+      <a
+        href="#"
+        class="mobile-link font-display hover:text-vibrantOrange mb-6 text-5xl uppercase"
+        >Services</a
+      >
+      <a
+        href="#"
+        class="mobile-link font-display hover:text-vibrantOrange mb-6 text-5xl uppercase"
+        >Contact</a
+      >
+    </div>
+
+    <!-- Smooth Scroll Wrapper -->
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <!-- HERO SECTION -->
+        <header
+          class="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden pt-20"
+        >
+          <!-- Background Gradients -->
+          <div
+            class="bg-deepPurple absolute top-1/4 left-1/4 h-96 w-96 animate-pulse rounded-full opacity-50 blur-[120px]"
+          ></div>
+          <div
+            class="bg-vibrantOrange absolute right-1/4 bottom-1/4 h-64 w-64 rounded-full opacity-20 blur-[100px]"
+          ></div>
+
+          <!-- Hero Content -->
+          <div class="relative z-10 max-w-7xl px-4 text-center">
+            <h1
+              class="hero-text font-display text-warmBeige translate-y-20 text-[12vw] leading-[0.85] font-bold tracking-tight uppercase opacity-0 mix-blend-overlay"
+            >
+              Digital
+            </h1>
+            <div class="my-2 flex items-center justify-center gap-4 md:gap-10">
+              <span
+                class="hero-shape bg-vibrantOrange block h-12 w-12 scale-0 rounded-full opacity-0 md:h-24 md:w-24"
+              ></span>
+              <h1
+                class="hero-text font-display text-lavender translate-y-20 text-[12vw] leading-[0.85] font-bold tracking-tight uppercase opacity-0"
+              >
+                Alchemy
+              </h1>
+            </div>
+
+            <div
+              class="hero-cta mt-8 flex flex-col items-center justify-center gap-6 opacity-0 md:flex-row"
+            >
+              <p
+                class="max-w-md text-center text-lg font-light text-gray-400 md:text-left"
+              >
+                We blend aesthetic precision with urban chaos to create content
+                that stops the scroll.
+              </p>
+              <button
+                class="text-charcoal hover:bg-vibrantOrange rounded-full bg-white px-8 py-4 font-bold tracking-wide uppercase transition-all duration-300 hover:scale-105 hover:text-white"
+              >
+                Start Project
+              </button>
+            </div>
+          </div>
+
+          <!-- Parallax Floating Images -->
+          <div
+            class="floating-img absolute top-20 left-10 h-40 w-32 overflow-hidden rounded-2xl opacity-0 md:left-32 md:h-64 md:w-48"
+            data-speed="0.5"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop"
+              class="h-full w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
+              alt="Abstract Art"
+            />
+          </div>
+          <div
+            class="floating-img absolute right-5 bottom-32 h-40 w-40 overflow-hidden rounded-full opacity-0 md:right-20 md:h-64 md:w-64"
+            data-speed="1.2"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1000&auto=format&fit=crop"
+              class="h-full w-full object-cover sepia transition-all duration-500 hover:sepia-0"
+              alt="Urban Texture"
+            />
+          </div>
+        </header>
+
+        <!-- SERVICES BENTO GRID -->
+        <section id="services" class="bg-charcoal relative px-4 py-24 md:px-10">
+          <div class="mx-auto max-w-7xl">
+            <div class="mb-12 flex items-end justify-between">
+              <h2
+                class="font-display text-5xl text-white uppercase md:text-7xl"
+              >
+                Our<br /><span class="text-lavender">Expertise</span>
+              </h2>
+              <p class="hidden max-w-xs text-right text-gray-400 md:block">
+                Curated services for modern brands looking to dominate the
+                digital landscape.
+              </p>
+            </div>
+
+            <!-- The Grid -->
+            <div
+              class="grid h-auto grid-cols-1 gap-4 md:h-[800px] md:grid-cols-3 md:grid-rows-2 md:gap-6"
+            >
+              <!-- Item 1: Large/Tall -->
+              <div
+                class="bento-card group bg-deepPurple/30 hover:bg-deepPurple/50 relative row-span-2 flex cursor-pointer flex-col justify-between overflow-hidden rounded-3xl border border-white/10 p-8 transition-all duration-500"
+              >
+                <div
+                  class="bg-lavender absolute -top-10 -right-10 h-40 w-40 opacity-20 blur-[80px] transition-opacity group-hover:opacity-40"
+                ></div>
+                <div class="mb-4 text-4xl">📷</div>
+                <div>
+                  <h3 class="font-display mb-2 text-2xl uppercase">
+                    Creative Direction
+                  </h3>
+                  <p class="text-sm text-gray-400">
+                    Full stack visual storytelling from concept to execution.
+                  </p>
+                </div>
+                <span
+                  class="bento-arrow absolute right-8 bottom-8 text-2xl transition-transform duration-300"
+                  >↗</span
+                >
+              </div>
+
+              <!-- Item 2: Wide -->
+              <div
+                class="bento-card group bg-warmBeige text-charcoal col-span-1 flex cursor-pointer flex-col items-start justify-between rounded-3xl p-8 transition-transform duration-300 hover:scale-[1.02] md:col-span-2 md:flex-row md:items-center"
+              >
+                <div class="mb-4 md:mb-0">
+                  <h3 class="font-display text-3xl font-bold uppercase">
+                    Social Content
+                  </h3>
+                  <p class="text-charcoal/70 mt-2">
+                    High-velocity assets for TikTok, Reels & Shorts.
+                  </p>
+                </div>
+                <div
+                  class="bg-vibrantOrange flex h-16 w-16 items-center justify-center rounded-full text-xl font-bold text-white transition-transform group-hover:rotate-90"
+                >
+                  →
+                </div>
+              </div>
+
+              <!-- Item 3: Standard -->
+              <div
+                class="bento-card group hover:border-vibrantOrange/50 flex flex-col justify-between rounded-3xl border border-white/5 bg-[#1F1F1F] p-8 transition-colors duration-300"
+              >
+                <h3 class="font-display text-vibrantOrange text-xl uppercase">
+                  Motion Design
+                </h3>
+                <p class="mt-4 text-sm text-gray-400">
+                  2D/3D animation that breathes life into static assets.
+                </p>
+              </div>
+
+              <!-- Item 4: Standard -->
+              <div
+                class="bento-card group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-gray-800 to-black p-8"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=500&auto=format&fit=crop"
+                  class="absolute inset-0 h-full w-full object-cover opacity-40 transition-transform duration-700 group-hover:scale-110"
+                  alt=""
+                />
+                <div class="relative z-10">
+                  <h3 class="font-display text-2xl text-white uppercase">
+                    Photography
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- HORIZONTAL SCROLL PORTFOLIO -->
+        <section
+          id="work"
+          class="bg-warmBeige text-charcoal relative overflow-hidden"
+        >
+          <div class="px-10 py-20">
+            <h2
+              class="font-display text-[10vw] leading-none tracking-tighter uppercase"
+            >
+              Selected Works
+            </h2>
+          </div>
+
+          <!-- The horizontal strip -->
+          <div
+            id="portfolio-container"
+            class="flex h-[70vh] flex-nowrap items-center pl-10"
+          >
+            <!-- Work Item 1 -->
+            <div
+              class="panel group relative mr-10 h-[50vh] w-[80vw] flex-shrink-0 overflow-hidden rounded-lg md:h-[60vh] md:w-[40vw]"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=1000&auto=format&fit=crop"
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                alt="Fashion Work"
+              />
+              <div
+                class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6"
+              >
+                <h3 class="font-display text-3xl text-white uppercase">
+                  Vogue / Summer
+                </h3>
+                <p class="text-lavender text-sm">Art Direction</p>
+              </div>
+            </div>
+
+            <!-- Work Item 2 -->
+            <div
+              class="panel group relative mr-10 h-[50vh] w-[80vw] flex-shrink-0 overflow-hidden rounded-lg md:h-[60vh] md:w-[40vw]"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?q=80&w=1000&auto=format&fit=crop"
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                alt="Tech Work"
+              />
+              <div
+                class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6"
+              >
+                <h3 class="font-display text-3xl text-white uppercase">
+                  Synth Wave
+                </h3>
+                <p class="text-lavender text-sm">3D Motion</p>
+              </div>
+            </div>
+
+            <!-- Work Item 3 -->
+            <div
+              class="panel group relative mr-10 h-[50vh] w-[80vw] flex-shrink-0 overflow-hidden rounded-lg md:h-[60vh] md:w-[40vw]"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop"
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                alt="Portrait Work"
+              />
+              <div
+                class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6"
+              >
+                <h3 class="font-display text-3xl text-white uppercase">
+                  Noir Series
+                </h3>
+                <p class="text-lavender text-sm">Photography</p>
+              </div>
+            </div>
+
+            <!-- CTA Panel -->
+            <div
+              class="panel bg-charcoal mr-10 flex h-[60vh] w-[40vw] flex-shrink-0 flex-col items-center justify-center rounded-lg text-white"
+            >
+              <h3 class="font-display mb-6 text-4xl uppercase">
+                Your Next Project?
+              </h3>
+              <div
+                class="hover:bg-vibrantOrange hover:border-vibrantOrange flex h-20 w-20 cursor-pointer items-center justify-center rounded-full border border-white/20 transition-all"
+              >
+                Let's Go
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="bg-charcoal px-4 py-32 text-center">
+          <p
+            class="text-lavender mb-8 font-mono text-sm tracking-widest uppercase"
+          >
+            Trusted by Visionaries
+          </p>
+          <div class="relative mx-auto max-w-3xl">
+            <div
+              class="font-display text-2xl leading-relaxed font-light text-white/90 md:text-4xl"
+            >
+              "Aura Studios didn't just create a campaign; they built a visual
+              language that redefined our brand identity in the luxury
+              streetwear market."
+            </div>
+            <div class="mt-8 flex items-center justify-center gap-4">
+              <div class="h-12 w-12 overflow-hidden rounded-full bg-gray-600">
+                <img
+                  src="https://randomuser.me/api/portraits/women/44.jpg"
+                  class="h-full w-full object-cover"
+                  alt="Client"
+                />
+              </div>
+              <div class="text-left">
+                <div class="font-bold text-white">Elena K.</div>
+                <div class="text-xs text-gray-500 uppercase">
+                  CMO, Apex Apparel
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-white/5 bg-[#0A0A0A] px-6 pt-20 pb-10">
+          <div
+            class="mx-auto mb-20 grid max-w-7xl grid-cols-1 gap-10 md:grid-cols-4"
+          >
+            <div class="col-span-2">
+              <h2
+                class="font-display mb-6 text-6xl font-bold text-white uppercase"
+              >
+                Let's Create<br />Culture.
+              </h2>
+              <a
+                href="mailto:hello@aura.studio"
+                class="text-vibrantOrange text-xl decoration-1 underline-offset-4 hover:underline"
+                >hello@aura.studio</a
+              >
+            </div>
+            <div>
+              <h4 class="mb-4 font-bold text-white uppercase">Sitemap</h4>
+              <ul class="space-y-2 text-sm text-gray-400">
+                <li><a href="#" class="hover:text-white">Work</a></li>
+                <li><a href="#" class="hover:text-white">Services</a></li>
+                <li><a href="#" class="hover:text-white">About</a></li>
+                <li><a href="#" class="hover:text-white">Careers</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="mb-4 font-bold text-white uppercase">Socials</h4>
+              <ul class="space-y-2 text-sm text-gray-400">
+                <li><a href="#" class="hover:text-white">Instagram</a></li>
+                <li><a href="#" class="hover:text-white">LinkedIn</a></li>
+                <li><a href="#" class="hover:text-white">Behance</a></li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="mx-auto flex max-w-7xl items-center justify-between border-t border-white/5 pt-8 text-xs tracking-wider text-gray-600 uppercase"
+          >
+            <div>© 2024 Aura Studios</div>
+            <div>Designed by You</div>
+          </div>
+        </footer>
+      </div>
+      <!-- End Smooth Content -->
+    </div>
+    <!-- End Smooth Wrapper -->
+
+    <!-- SCRIPTS -->
+    <!-- GSAP Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+      // 1. Initialize Lenis Smooth Scroll
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: "vertical",
+        gestureDirection: "vertical",
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+      });
+
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+
+      // Integrate Lenis with GSAP ScrollTrigger
+      gsap.registerPlugin(ScrollTrigger);
+
+      // 2. Custom Cursor Logic
+      const cursorDot = document.querySelector(".cursor-dot");
+      const cursorOutline = document.querySelector(".cursor-outline");
+
+      window.addEventListener("mousemove", (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        // Dot follows instantly
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+
+        // Outline follows with lag (using GSAP for smoothness)
+        gsap.to(cursorOutline, {
+          x: posX,
+          y: posY,
+          duration: 0.15,
+          ease: "power2.out",
+        });
+      });
+
+      // Hover effects for cursor
+      const linkElements = document.querySelectorAll("a, button, .bento-card");
+      linkElements.forEach((link) => {
+        link.addEventListener("mouseenter", () => {
+          gsap.to(cursorOutline, {
+            scale: 1.5,
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            borderColor: "transparent",
+          });
+        });
+        link.addEventListener("mouseleave", () => {
+          gsap.to(cursorOutline, {
+            scale: 1,
+            backgroundColor: "transparent",
+            borderColor: "rgba(255, 255, 255, 0.5)",
+          });
+        });
+      });
+
+      // 3. Hero Animations
+      const tl = gsap.timeline();
+
+      tl.to(".hero-text", {
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power4.out",
+      })
+        .to(
+          ".hero-shape",
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+          },
+          "-=1",
+        )
+        .to(
+          ".hero-cta",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+          },
+          "-=0.5",
+        )
+        .to(
+          ".floating-img",
+          {
+            opacity: 1,
+            duration: 1,
+            stagger: 0.3,
+          },
+          "-=1",
+        );
+
+      // Parallax Effect on Hero Images
+      document.addEventListener("mousemove", (e) => {
+        document.querySelectorAll(".floating-img").forEach((img) => {
+          const speed = img.getAttribute("data-speed");
+          const x = (window.innerWidth - e.pageX * speed) / 100;
+          const y = (window.innerHeight - e.pageY * speed) / 100;
+
+          gsap.to(img, {
+            x: x,
+            y: y,
+            ease: "power2.out",
+            duration: 1,
+          });
+        });
+      });
+
+      // 4. Bento Grid Reveal
+      gsap.utils.toArray(".bento-card").forEach((card, i) => {
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          delay: i * 0.1,
+          ease: "power3.out",
+        });
+      });
+
+      // 5. Horizontal Scroll Portfolio
+      let sections = gsap.utils.toArray(".panel");
+
+      gsap.to(sections, {
+        xPercent: -100 * (sections.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#work",
+          pin: true,
+          scrub: 1,
+          snap: 1 / (sections.length - 1),
+          end: () =>
+            "+=" + document.querySelector("#portfolio-container").offsetWidth,
+        },
+      });
+
+      // 6. Mobile Menu
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
+      let isMenuOpen = false;
+
+      const menuTl = gsap.timeline({ paused: true });
+      menuTl
+        .to(mobileMenu, { x: 0, duration: 0.5, ease: "power3.inOut" })
+        .from(
+          mobileLinks,
+          { y: 50, opacity: 0, stagger: 0.1, duration: 0.4 },
+          "-=0.2",
+        );
+
+      menuBtn.addEventListener("click", () => {
+        if (!isMenuOpen) {
+          menuTl.play();
+          menuBtn.classList.add("text-white");
+        } else {
+          menuTl.reverse();
+        }
+        isMenuOpen = !isMenuOpen;
+      });
+    </script>
+  </body>
+</html>

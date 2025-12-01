@@ -1,0 +1,37 @@
+---
+title: React Hooks - useEffect
+date: 2024-04-04
+description: React Hooks **revolutionized** how developers write React applications by introducing a way to use state and other React features **without writing class components**. Since their introduction in React 16.8, hooks have become the standard approach for building modern React applications.
+---
+
+# Getting Started with React Hooks
+
+React Hooks **revolutionized** how developers write React applications by introducing a way to use state and other React features **without writing class components**. Since their introduction in React 16.8, hooks have become the standard approach for building modern React applications.
+
+---
+
+## Understanding `useState`
+
+The `useState` hook is the foundation of state management in functional components. It allows you to add **state variables** to your components in a simple and intuitive way. When you call `useState`, it returns an array with two elements:
+
+1. The **current state value**
+2. A **function to update** it
+
+This pattern eliminates the complexity of `this` binding in class components.
+
+**Example: Counter Component**
+
+```jsx
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
